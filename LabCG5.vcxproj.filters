@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Wall.cpp">
+      <Filter>World\Walls</Filter>
+    </ClCompile>
+    <ClCompile Include="GDI.cpp">
+      <Filter>Utils\GDI</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureHandler.cpp">
+      <Filter>Utils\TextureHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="World.cpp">
+      <Filter>World</Filter>
+    </ClCompile>
+    <ClCompile Include="MovementHandler.cpp">
+      <Filter>MovementHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry.cpp">
+      <Filter>Utils\Geometry</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="World">
+      <UniqueIdentifier>{a9e37167-704f-4561-9d4e-d1d53dd36be0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World\Walls">
+      <UniqueIdentifier>{29f9994a-38e6-4217-a797-59dbab4014ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{22cb5add-00da-4630-a737-529fded1b6ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\GDI">
+      <UniqueIdentifier>{b83b3e08-72a1-478f-b465-70119b4f3f85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\TextureHandler">
+      <UniqueIdentifier>{771d065d-929b-4262-9a04-802796bdacea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MovementHandler">
+      <UniqueIdentifier>{f0555e25-10ca-4846-9758-0ac615364c33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\Geometry">
+      <UniqueIdentifier>{d2ac4b19-4de9-40c9-89c1-2a4a833fd91e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\Geometry\Point">
+      <UniqueIdentifier>{100763fa-1b3a-420e-a62f-51480e8d56cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Textures">
+      <UniqueIdentifier>{e8223862-6e35-4528-acdc-225e845bf271}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sounds">
+      <UniqueIdentifier>{d4687623-243b-4e2c-b803-18e7e3972c70}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Wall.h">
+      <Filter>World\Walls</Filter>
+    </ClInclude>
+    <ClInclude Include="GDI.h">
+      <Filter>Utils\GDI</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureHandler.h">
+      <Filter>Utils\TextureHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
+      <Filter>World</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>Utils\Geometry\Point</Filter>
+    </ClInclude>
+    <ClInclude Include="MovementHandler.h">
+      <Filter>MovementHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry.h">
+      <Filter>Utils\Geometry</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Textures\wooden wall texture.jpg">
+      <Filter>Textures</Filter>
+    </Image>
+    <Image Include="Textures\white brick wall texture.jpg">
+      <Filter>Textures</Filter>
+    </Image>
+    <Image Include="Textures\wall.jpg">
+      <Filter>Textures</Filter>
+    </Image>
+    <Image Include="Textures\samig.jpg">
+      <Filter>Textures</Filter>
+    </Image>
+    <Image Include="Textures\moss wall texture.jpg">
+      <Filter>Textures</Filter>
+    </Image>
+    <Image Include="Textures\gray brick wall texture.jpg">
+      <Filter>Textures</Filter>
+    </Image>
+    <Image Include="Textures\grass texture.jpg">
+      <Filter>Textures</Filter>
+    </Image>
+    <Image Include="Textures\exit texture.jpg">
+      <Filter>Textures</Filter>
+    </Image>
+    <Image Include="Textures\dirt wall texture.jpg">
+      <Filter>Textures</Filter>
+    </Image>
+    <Image Include="Textures\dirt texture.jpg">
+      <Filter>Textures</Filter>
+    </Image>
+    <Image Include="Textures\deva cassel.jpg">
+      <Filter>Textures</Filter>
+    </Image>
+    <Image Include="Textures\concrete wall1 texture.jpg">
+      <Filter>Textures</Filter>
+    </Image>
+    <Image Include="Textures\concrete wall texture.jpg">
+      <Filter>Textures</Filter>
+    </Image>
+    <Image Include="Textures\brick wall texture.jpg">
+      <Filter>Textures</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Sounds\background sound.wav">
+      <Filter>Sounds</Filter>
+    </Media>
+    <Media Include="Sounds\step sound.wav">
+      <Filter>Sounds</Filter>
+    </Media>
+  </ItemGroup>
+</Project>
