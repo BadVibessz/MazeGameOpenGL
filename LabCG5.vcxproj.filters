@@ -20,6 +20,9 @@
     <ClCompile Include="Geometry.cpp">
       <Filter>Utils\Geometry</Filter>
     </ClCompile>
+    <ClCompile Include="Painter.cpp">
+      <Filter>Utils\Painter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="World">
@@ -52,6 +55,9 @@
     <Filter Include="Sounds">
       <UniqueIdentifier>{d4687623-243b-4e2c-b803-18e7e3972c70}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utils\Painter">
+      <UniqueIdentifier>{c281baad-16ac-4202-b935-1ecbf7666f24}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Wall.h">
@@ -74,6 +80,9 @@
     </ClInclude>
     <ClInclude Include="Geometry.h">
       <Filter>Utils\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Painter.h">
+      <Filter>Utils\Painter</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

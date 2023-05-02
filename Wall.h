@@ -10,9 +10,6 @@ private:
 	unsigned int _textureId;
 	std::vector<float> _textureCoordinates;
 
-	// todo: textures
-
-
 public:
 	Wall(std::vector<float> coord, unsigned int textireId,
 		std::vector<float> textureCoordinates);

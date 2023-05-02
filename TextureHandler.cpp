@@ -8,7 +8,6 @@ unsigned int TextureHandler::LoadTexture(std::wstring const& filename)
 	if (bmp.GetLastStatus() != Gdiplus::Ok)
 		throw std::runtime_error("Error loading texture file");
 
-
 	// Определяем формат пикселей для использования 
 	// с методом Bitmap::Lock и функцией gluBuild2DMipmaps
 	PixelFormat pixelFormat = 0;

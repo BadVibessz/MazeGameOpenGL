@@ -49,8 +49,6 @@ void MovementHandler::LookUp()
 {
 	zRotationAngle = zRotationAngle + zRotationSpeed > 180 ? 180
 		: zRotationAngle + zRotationSpeed;
-
-	//glRotatef(-zRotationAngle, 1, 0, 0);
 }
 
 void MovementHandler::LookDown()
@@ -83,8 +81,6 @@ void MovementHandler::MoveForward()
 	if(!usingCollision) _position = nextPoisition;
 	else if(IsValidPoisition(nextPoisition))
 		_position = nextPoisition;
-
-
 }
 
 void MovementHandler::MoveBackwards()

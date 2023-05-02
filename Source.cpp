@@ -4,6 +4,7 @@
 #include "World.h"
 #include "TextureHandler.h"
 #include "MovementHandler.h"
+#include "Painter.h"
 
 #define PI 3.1415926535897932
 
@@ -13,7 +14,7 @@ float worldSize = 200;
 auto world = World(worldSize, worldSize);
 
 bool isDrawingFog = true;
-
+bool isPlayingSound = true;
 
 // walls
 Wall mainFloor;
@@ -39,50 +40,6 @@ void ResizeFunction(int worldSize, int height)
 	glLoadIdentity();
 }
 
-// todo: to painter?
-void DrawWalls()
-{
-	// drawing walls
-	glColor3f(1, 1, 1);
-
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	for (auto wall : walls)
-	{
-		auto textureCoordinates = wall.GetTextureCoordinates();
-		auto coordinates = wall.GetCoordinates();
-
-		glBindTexture(GL_TEXTURE_2D, wall.GetTextureId());
-		glTexCoordPointer(2, GL_FLOAT, 0, &textureCoordinates[0]);
-
-		glVertexPointer(3, GL_FLOAT, 0, &coordinates[0]);
-		glDrawArrays(GL_QUADS, 0, 4);
-
-	}
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-	glDisableClientState(GL_VERTEX_ARRAY);
-}
-
-void DrawFloor()
-{
-	// drawing floor
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	{
-		auto textureCoordinates = mainFloor.GetTextureCoordinates();
-		auto coordinates = mainFloor.GetCoordinates();
-
-		glBindTexture(GL_TEXTURE_2D, mainFloor.GetTextureId());
-		glTexCoordPointer(2, GL_FLOAT, 0, &textureCoordinates[0]);
-
-		glVertexPointer(3, GL_FLOAT, 0, &coordinates[0]);
-		glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
-	}
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-	glDisableClientState(GL_VERTEX_ARRAY);
-}
-
-// todo: to other class?
 void MakeView()
 {
 	glRotatef(-movementHandler.zRotationAngle, 1, 0, 0);
@@ -93,17 +50,6 @@ void MakeView()
 	glTranslatef(-position.x, -position.y, -2);
 }
 
-void DrawFog(float density = 0.05)
-{
-	float color[] = { 0, 0, 0 };
-
-	glFogi(GL_FOG_MODE, GL_EXP2);
-	glFogfv(GL_FOG_COLOR, color);
-	glFogf(GL_FOG_DENSITY, density);
-	glFogf(GL_FOG_START, 1);
-	glFogf(GL_FOG_END, 10);
-}
-
 void DisplayFunction()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -112,14 +58,14 @@ void DisplayFunction()
 
 	MakeView();
 
-	DrawFloor();
-	DrawWalls();
-	if (!isDrawingFog) DrawFog(0);
-	else DrawFog();
+	Painter::DrawWall(mainFloor);
+	Painter::DrawWalls(walls);
+
+	if (!isDrawingFog) Painter::DrawFog(0);
+	else Painter::DrawFog();
 
 	glutSwapBuffers();
 }
-
 
 void SpecialFunction(int key, int x, int y)
 {
@@ -153,13 +99,25 @@ void SpecialFunction(int key, int x, int y)
 		{
 			movementHandler.usingCollision = true;
 			movementHandler.movementSpeed = 0.5f;
-
 		}
 		break;
 
 	case GLUT_KEY_F2:
 		if (isDrawingFog) isDrawingFog = false;
 		else isDrawingFog = true;
+		break;
+
+	case GLUT_KEY_F3: 
+		if (isPlayingSound) 
+		{
+			isPlayingSound = false;
+			PlaySound(nullptr, nullptr, 0);
+		}
+		else
+		{
+			isPlayingSound = true;
+			PlaySound(L"sounds/background sound.wav", NULL, SND_ASYNC | SND_FILENAME | SND_LOOP);
+		}
 	}
 	glutPostRedisplay();
 }
@@ -170,26 +128,18 @@ void KeyboardFunction(unsigned char key, int x, int y)
 	{
 	case 'w': case 'W':
 		movementHandler.MoveForward();
-		//PlaySound(L"step sound.wav", NULL, SND_ASYNC | SND_FILENAME );
-
 		break;
 
 	case 's': case 'S':
 		movementHandler.MoveBackwards();
-		//PlaySound(L"step sound.wav", NULL, SND_ASYNC | SND_FILENAME);
-
 		break;
 
 	case 'a': case 'A':
 		movementHandler.MoveLeft();
-		//PlaySound(L"step sound.wav", NULL, SND_ASYNC | SND_FILENAME );
-
 		break;
 
 	case 'd': case 'D':
 		movementHandler.MoveRight();
-		//PlaySound(L"step sound.wav", NULL, SND_ASYNC | SND_FILENAME );
-
 		break;
 
 	case 27: // 27 == escape
@@ -214,7 +164,6 @@ void Init()
 	UINT externalWallsTexture = TextureHandler::LoadTexture(L"textures/white brick wall texture.jpg");
 	auto externalWalls = world.GetExternalWalls(externalWallsTexture);
 
-
 	auto textures = vector<UINT>();
 
 	textures.push_back(TextureHandler::LoadTexture(L"textures/moss wall texture.jpg"));
@@ -233,9 +182,7 @@ void Init()
 	movementHandler.AddWalls(externalWalls);
 	movementHandler.AddWalls(internalWalls);
 
-	// todo: to solid class
 	PlaySound(L"sounds/background sound.wav", NULL, SND_ASYNC | SND_FILENAME | SND_LOOP);
-
 }
 
 int oldX = 0, oldY = 0;
@@ -243,29 +190,14 @@ int oldX = 0, oldY = 0;
 
 void OnMouseMove(int x, int y)
 {
-	float cx = 1280 / 2.f;
-	float cy = 720 / 2.f;
-
-
-
 	if (oldX - x > 0)  movementHandler.LookLeft();
 	else if (oldX - x < 0) movementHandler.LookRight();
 
 	if (oldY - y > 0) movementHandler.LookUp();
 	else if (oldY - y < 0) movementHandler.LookDown();
 
-	/*if (cx - x > 0)  movementHandler.LookLeft();
-	else if (cx - x < 0) movementHandler.LookRight();
-
-	if (cy - y > 0) movementHandler.LookUp();
-	else if (cy - y < 0) movementHandler.LookDown();*/
-
-	//glutWarpPointer(cx, cy); // обратно в центр!
-
-
 	oldX = x;
 	oldY = y;
-
 
 	glutPostRedisplay();
 }
