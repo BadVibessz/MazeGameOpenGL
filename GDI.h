@@ -6,13 +6,12 @@
 #include <tchar.h>
 #include <stdexcept>
 
-#pragma comment(lib,"gdiplus.lib") // todo: understand
+#pragma comment(lib,"gdiplus.lib")
 
 using namespace Gdiplus;
 
 class GDI
 {
-
 private:
 	unsigned long _token;
 

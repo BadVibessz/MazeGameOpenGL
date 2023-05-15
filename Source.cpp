@@ -19,6 +19,7 @@ bool isPlayingSound = true;
 // walls
 Wall mainFloor;
 vector<Wall> walls;
+SkyBox skyBox;
 
 auto gdi = GDI();
 
@@ -26,7 +27,6 @@ MovementHandler movementHandler(myNamespace::Point(worldSize - 10, -worldSize + 
 
 void ResizeFunction(int worldSize, int height)
 {
-
 	const float aspectRatio = (float)worldSize / (float)height;
 
 	glViewport(0, 0, worldSize, height);
@@ -58,6 +58,7 @@ void DisplayFunction()
 
 	MakeView();
 
+	skyBox.Draw(worldSize);
 	Painter::DrawWall(mainFloor);
 	Painter::DrawWalls(walls);
 
@@ -107,8 +108,8 @@ void SpecialFunction(int key, int x, int y)
 		else isDrawingFog = true;
 		break;
 
-	case GLUT_KEY_F3: 
-		if (isPlayingSound) 
+	case GLUT_KEY_F3:
+		if (isPlayingSound)
 		{
 			isPlayingSound = false;
 			PlaySound(nullptr, nullptr, 0);
@@ -182,12 +183,22 @@ void Init()
 	movementHandler.AddWalls(externalWalls);
 	movementHandler.AddWalls(internalWalls);
 
+
+	// skybox
+
+	uint sb1 = TextureHandler::LoadTexture(L"textures/sb1.jpg");
+	uint sb2 = TextureHandler::LoadTexture(L"textures/sb2.jpg");
+	uint sb3 = TextureHandler::LoadTexture(L"textures/sb3.jpg");
+	uint sb4 = TextureHandler::LoadTexture(L"textures/sb4.jpg");
+	uint sb5 = TextureHandler::LoadTexture(L"textures/sb5.jpg");
+	uint sb6 = TextureHandler::LoadTexture(L"textures/sb6.jpg");
+
+	skyBox = world.GetSkyBox(sb1, sb2, sb3, sb4, sb5, sb6);
+
 	PlaySound(L"sounds/background sound.wav", NULL, SND_ASYNC | SND_FILENAME | SND_LOOP);
 }
 
 int oldX = 0, oldY = 0;
-
-
 void OnMouseMove(int x, int y)
 {
 	if (oldX - x > 0)  movementHandler.LookLeft();
@@ -222,8 +233,6 @@ int main(int argc, char* argv[])
 	glutDisplayFunc(&DisplayFunction);
 	glutSpecialFunc(&SpecialFunction);
 	glutKeyboardFunc(&KeyboardFunction);
-
-	// todo:
 	glutPassiveMotionFunc(&OnMouseMove);
 
 	glutMainLoop();

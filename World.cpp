@@ -77,6 +77,12 @@ std::vector<Wall> World::GetExit(uint textureId) const
 	};
 }
 
+SkyBox World::GetSkyBox(uint leftTexture, uint rightTexture, uint bottomTexture, uint topTexture, uint backTexture, uint frontTexture)
+{
+	return SkyBox(leftTexture, rightTexture, bottomTexture,
+		topTexture, backTexture, frontTexture);
+}
+
 std::vector<Wall> World::GetInternalWalls(std::vector<uint> textures) const
 {
 	float height = 15;
@@ -289,7 +295,6 @@ std::vector<Wall> World::GetInternalWalls(std::vector<uint> textures) const
 		{ 0,0, 4,0, 4,-2, 0,-2 }),
 
 		// wooden
-
 		Wall({ externalWallSize / 2 - 200, -externalWallSize + 50, 0,
 		externalWallSize / 2 - 200, -externalWallSize + 150, 0,
 		externalWallSize / 2 - 200, -externalWallSize + 150, height,

@@ -14,7 +14,6 @@ bool MovementHandler::IsValidPoisition(myNamespace::Point position) const
 
 		if (Geometry::DistanceSegmentToPoint(A, B, position) <= cameraRadius)
 			return false;
-
 	}
 
 	return true;

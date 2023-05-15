@@ -36,5 +36,4 @@ void Painter::DrawFog(float density, float r, float g, float b)
 	glFogf(GL_FOG_DENSITY, density);
 	glFogf(GL_FOG_START, 1);
 	glFogf(GL_FOG_END, 10);
-
 }

@@ -23,6 +23,12 @@
     <ClCompile Include="Painter.cpp">
       <Filter>Utils\Painter</Filter>
     </ClCompile>
+    <ClCompile Include="SkyBox.cpp">
+      <Filter>World\SkyBox</Filter>
+    </ClCompile>
+    <ClCompile Include="TexturizedCube.cpp">
+      <Filter>World\SkyBox\TexturizedCube</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="World">
@@ -58,6 +64,12 @@
     <Filter Include="Utils\Painter">
       <UniqueIdentifier>{c281baad-16ac-4202-b935-1ecbf7666f24}</UniqueIdentifier>
     </Filter>
+    <Filter Include="World\SkyBox">
+      <UniqueIdentifier>{e95eced6-0e95-404f-9404-cb9d75389590}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World\SkyBox\TexturizedCube">
+      <UniqueIdentifier>{d5bb5337-2a27-4f7b-a462-6612b0049619}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Wall.h">
@@ -83,6 +95,12 @@
     </ClInclude>
     <ClInclude Include="Painter.h">
       <Filter>Utils\Painter</Filter>
+    </ClInclude>
+    <ClInclude Include="SkyBox.h">
+      <Filter>World\SkyBox</Filter>
+    </ClInclude>
+    <ClInclude Include="TexturizedCube.h">
+      <Filter>World\SkyBox\TexturizedCube</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
